@@ -40,6 +40,11 @@ PRODUCT_PACKAGES += \
 BOARD_API_LEVEL := 33
 PRODUCT_SHIPPING_API_LEVEL := 34
 
+# Biometrics
+PRODUCT_PACKAGES += \
+    android.frameworks.cameraservice.device-V1-ndk.vendor \
+    android.frameworks.cameraservice.service-V1-ndk.vendor
+
 # Boot control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-qti \
