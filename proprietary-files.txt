@@ -2470,7 +2470,6 @@ vendor/bin/netmgrd
 vendor/bin/nqnfcinfo
 vendor/bin/nv_mac
 vendor/bin/osal_in_test_example
-vendor/bin/PalTest
 vendor/bin/pd-mapper
 vendor/bin/pktlogconf
 vendor/bin/PktRspTest
