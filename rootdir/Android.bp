@@ -11,3 +11,10 @@ prebuilt_etc {
     sub_dir: "init",
     recovery: true,
 }
+
+// fstab
+prebuilt_etc {
+    name: "fstab.qcom",
+    src: "etc/fstab.qcom",
+    vendor: true,
+}

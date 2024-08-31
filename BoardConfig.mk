@@ -107,6 +107,12 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
+# Sepolicy
+include device/qcom/sepolicy_vndr/SEPolicy.mk
+
+# Security patch level
+VENDOR_SECURITY_PATCH := 2024-07-01
+
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
@@ -118,3 +124,6 @@ BOARD_AVB_VENDOR_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
 BOARD_AVB_VENDOR_BOOT_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX := 1
 BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX_LOCATION := 1
+
+# Inherit the proprietary files
+include vendor/xiaomi/vermeer/BoardConfigVendor.mk

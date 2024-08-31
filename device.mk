@@ -41,6 +41,7 @@ PRODUCT_SHIPPING_API_LEVEL := 34
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 PRODUCT_PACKAGES += \
+    fstab.qcom \
     init.recovery.qcom.rc
 
 PRODUCT_COPY_FILES += \
@@ -49,3 +50,6 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+
+# Inherit the proprietary files
+$(call inherit-product, vendor/xiaomi/vermeer/vermeer-vendor.mk)
