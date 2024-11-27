@@ -85,9 +85,15 @@ PRODUCT_PACKAGES += \
     CarrierConfigOverlayVermeer \
     DeviceAsWebcamResVermeer \
     FrameworkOverlayVermeer \
-    SettingsOverlayVermeer \
+    SecureElementOverlayVermeer \
     SystemUIOverlayVermeer \
-    TelephonyOverlayVermeer 
+    SettingsOverlayVermeer \
+    SettingsProviderOverlayVermeerPOCO \
+    SettingsProviderOverlayVermeerRedmi \
+    TelephonyOverlayVermeer \
+    WifiOverlayVermeer \
+    WifiOverlayVermeerPOCO \
+    WifiOverlayVermeerRedmi
 
 # Audio
 PRODUCT_COPY_FILES += \
