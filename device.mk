@@ -40,6 +40,15 @@ PRODUCT_PACKAGES += \
 BOARD_API_LEVEL := 33
 PRODUCT_SHIPPING_API_LEVEL := 34
 
+# Boot control
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.2-impl-qti \
+    android.hardware.boot@1.2-impl-qti.recovery \
+    android.hardware.boot@1.2-service
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
+
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.1-impl-mock \

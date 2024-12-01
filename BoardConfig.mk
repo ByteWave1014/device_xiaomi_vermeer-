@@ -41,6 +41,9 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a75
 TARGET_BOOTLOADER_BOARD_NAME := kalama
 TARGET_NO_BOOTLOADER := true
 
+# Boot Control
+$(call soong_config_set, ufsbsg, ufsframework, bsg)
+
 # Kernel
 BOARD_BOOTIMG_HEADER_VERSION := 4
 BOARD_KERNEL_BASE := 0x00000000
