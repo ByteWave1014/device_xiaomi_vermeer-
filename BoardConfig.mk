@@ -5,6 +5,7 @@
 #
 
 DEVICE_PATH := device/xiaomi/vermeer
+KERNEL_PATH := device/xiaomi/vermeer-kernel
 
 # A/B
 AB_OTA_UPDATER := true
@@ -44,30 +45,49 @@ TARGET_NO_BOOTLOADER := true
 # Boot Control
 $(call soong_config_set, ufsbsg, ufsframework, bsg)
 
-# Kernel
-BOARD_BOOTIMG_HEADER_VERSION := 4
-BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := video=vfb:640x400,bpp=32,memsize=3072000 disable_dma32=on swinfo.fingerprint=vermeer:$(LINEAGE_VERSION) mtdoops.fingerprint=vermeer:$(LINEAGE_VERSION) bootconfig
+# Display
+TARGET_SCREEN_DENSITY := 530
+
+# DTB
+BOARD_USES_DT := true
+BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtbs
+BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbs/dtbo.img
+
+# Kernel - Prebuilt
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
+BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_KERNEL_SEPARATED_DTBO := true
-TARGET_KERNEL_CONFIG := vermeer_defconfig
-TARGET_KERNEL_SOURCE := kernel/xiaomi/vermeer
-
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-
-# Kernel - prebuilt
+BOARD_RAMDISK_USE_LZ4 := true
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_FORCE_PREBUILT_KERNEL := true
-ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/kernel
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilts/dtb.img
-BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
-BOARD_INCLUDE_DTB_IN_BOOTIMG := 
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
-BOARD_KERNEL_SEPARATED_DTBO := 
-endif
+
+BOARD_KERNEL_CMDLINE := \
+    kasan=off \
+    disable_dma32=on \
+    rcu_nocbs=all \
+    rcutree.enable_rcu_lazy=1 \
+    mtdoops.fingerprint=$(LINEAGE_VERSION)
+
+BOARD_BOOTCONFIG := \
+    androidboot.hardware=qcom \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3 \
+    androidboot.init_fatal_reboot_target=recovery
+
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_INIT_BOOT_HEADER_VERSION := 4
+BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
+
+# Kill kernel build task while preserving kernel
+TARGET_NO_KERNEL_OVERRIDE := true
+
+# Workaround to make soong generator work
+TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
+TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image
+PRODUCT_COPY_FILES += \
+    $(TARGET_PREBUILT_KERNEL):kernel
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
@@ -90,9 +110,6 @@ BOARD_XIAOMI_DYNAMIC_PARTITIONS_SIZE := 9122611200 # TODO: Fix hardcoded value
 
 # Platform
 TARGET_BOARD_PLATFORM := kalama
-
-# Display
-TARGET_SCREEN_DENSITY := 530
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/props/system.prop
