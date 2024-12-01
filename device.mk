@@ -93,5 +93,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
+# Touch
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.xiaomi
+
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/vermeer/vermeer-vendor.mk)
