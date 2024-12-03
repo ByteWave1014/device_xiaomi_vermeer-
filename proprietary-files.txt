@@ -4235,7 +4235,7 @@ vendor/lib64/libagm_compress_plugin.so
 vendor/lib64/libagm_mixer_plugin.so
 vendor/lib64/libagmmixer.so
 vendor/lib64/libagm_pcm_plugin.so
-vendor/lib64/libagm.so
+-vendor/lib64/libagm.so
 vendor/lib64/libAlacSwDec.so
 vendor/lib64/libalsautils.so
 vendor/lib64/libaodoptfeature.so
@@ -4244,7 +4244,7 @@ vendor/lib64/libApeSwDec.so
 vendor/lib64/libappclassifier.so
 vendor/lib64/libar-acdb.so
 vendor/lib64/libar-gpr.so
-vendor/lib64/libar-gsl.so
+-vendor/lib64/libar-gsl.so
 vendor/lib64/libar-pal.so
 vendor/lib64/libats.so
 vendor/lib64/libaudiochargerlistener.so
@@ -4946,7 +4946,7 @@ vendor/lib64/vendor.qti.esepowermanager@1.1.so
 vendor/lib64/vendor.qti.gnss-service.so
 vendor/lib64/vendor.qti.gnss-V3-ndk.so
 vendor/lib64/vendor.qti.gnss-V4-ndk.so
-vendor/lib64/vendor.qti.hardware.AGMIPC@1.0-impl.so
+-vendor/lib64/vendor.qti.hardware.AGMIPC@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.AGMIPC@1.0.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 vendor/lib64/vendor.qti.hardware.automotive.vehicle@1.0.so
